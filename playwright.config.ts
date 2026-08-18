@@ -1,0 +1,16 @@
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./tests/e2e",
+  fullyParallel: true,
+  reporter: "line",
+  use: {
+    baseURL: "http://127.0.0.1:4321/COPC01-ePortfolio/",
+    trace: "retain-on-failure",
+  },
+  webServer: {
+    command: "npm run serve:test",
+    url: "http://127.0.0.1:4321/COPC01-ePortfolio/",
+    reuseExistingServer: true,
+  },
+});
