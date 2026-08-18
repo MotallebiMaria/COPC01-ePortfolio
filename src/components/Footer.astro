@@ -1,0 +1,28 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<footer>
+  <div class="page-shell footer-grid">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <a class="contact" href="mailto:motallebimaria@gmail.com">motallebimaria@gmail.com</a>
+    </div>
+    <div class="footer-links meta">
+      <a href="https://github.com/MotallebiMaria">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/maria-motallebi/">LinkedIn ↗</a>
+      <a href={`${base}resume/`}>Résumé →</a>
+    </div>
+    <p class="meta colophon">Designed and built by Maria Motallebi<br />Toronto, Canada · 2026</p>
+  </div>
+</footer>
+
+<style>
+  footer { padding: 4rem 0 2rem; color: var(--paper); background: var(--ink); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
+  footer .eyebrow { color: #a4a39d; }
+  .contact { display: inline-block; margin-top: 1rem; color: var(--paper); font-size: clamp(1.25rem, 2.5vw, 2.2rem); letter-spacing: -.04em; text-decoration: none; }
+  .footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
+  .footer-links a { color: var(--paper); }
+  .colophon { margin: 0; color: #a4a39d; }
+  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,69 @@
+:root {
+  --paper: #f4f1e9;
+  --paper-bright: #fbfaf6;
+  --ink: #111111;
+  --muted: #65645f;
+  --rule: #cbc8be;
+  --blue: #1746e0;
+  --blue-dark: #0c2da9;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --page: min(100% - 2.5rem, 90rem);
+  --section: clamp(5rem, 9vw, 9rem);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); font-size: 1rem; line-height: 1.65; text-rendering: optimizeLegibility; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration-thickness: .08em; text-underline-offset: .18em; }
+a:hover { color: var(--blue); }
+button, input { font: inherit; }
+button { color: inherit; }
+::selection { color: white; background: var(--blue); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+
+.skip-link { position: fixed; z-index: 100; top: .75rem; left: .75rem; padding: .75rem 1rem; color: white; background: var(--blue); transform: translateY(-160%); }
+.skip-link:focus { transform: none; }
+.page-shell { width: var(--page); margin-inline: auto; }
+.eyebrow, .meta, .archive-id, .button-link, .filter-button, .nav-link { font-family: var(--mono); font-size: .76rem; line-height: 1.35; letter-spacing: .075em; text-transform: uppercase; }
+.eyebrow { display: flex; align-items: center; gap: .8rem; color: var(--muted); }
+.eyebrow::before { width: 1.9rem; height: 1px; content: ""; background: currentColor; }
+.display { max-width: 14ch; margin: 0; font-size: clamp(3.35rem, 8.7vw, 8.4rem); font-weight: 500; line-height: .91; letter-spacing: -.065em; }
+.section-title { max-width: 14ch; margin: 0; font-size: clamp(2.2rem, 4.7vw, 4.8rem); font-weight: 500; line-height: 1; letter-spacing: -.045em; }
+.lede { max-width: 43rem; margin: 0; font-size: clamp(1.15rem, 2vw, 1.6rem); line-height: 1.45; letter-spacing: -.018em; }
+.rule { border: 0; border-top: 1px solid var(--rule); }
+.button-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem; min-width: 13rem; padding: .95rem 0; border-bottom: 1px solid currentColor; text-decoration: none; transition: color .2s, gap .3s var(--ease); }
+.button-link:hover { gap: 2.5rem; }
+.blue { color: var(--blue); }
+.surface { background: var(--paper-bright); }
+
+.media-placeholder { position: relative; display: grid; min-height: 18rem; place-items: center; overflow: hidden; border: 1px solid var(--rule); background: linear-gradient(135deg, rgba(23,70,224,.08), transparent 52%), var(--paper-bright); }
+.media-placeholder::before, .media-placeholder::after { position: absolute; content: ""; background: var(--rule); }
+.media-placeholder::before { width: 140%; height: 1px; transform: rotate(-28deg); }
+.media-placeholder::after { width: 1px; height: 140%; transform: rotate(61deg); }
+.media-placeholder span { z-index: 1; max-width: 16rem; padding: .7rem 1rem; color: var(--muted); background: var(--paper-bright); font-family: var(--mono); font-size: .72rem; text-align: center; letter-spacing: .06em; text-transform: uppercase; }
+
+.reveal { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(1.25rem); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (max-width: 720px) {
+  :root { --page: min(100% - 1.5rem, 90rem); --section: 4.5rem; }
+  .display { font-size: clamp(3rem, 16vw, 5rem); }
+  .media-placeholder { min-height: 14rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media print {
+  :root { --paper: white; --paper-bright: white; --ink: black; }
+  body { font-size: 10pt; }
+  .site-header, body > footer, .skip-link, .no-print { display: none !important; }
+  main { padding: 0 !important; }
+  a { text-decoration: none; }
+}
