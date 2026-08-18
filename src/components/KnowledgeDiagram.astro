@@ -1,8 +1,8 @@
 <figure class="knowledge-diagram" aria-labelledby="diagram-title diagram-desc">
   <figcaption>
-    <span class="meta">Visual artifact / public reconstruction</span>
-    <strong id="diagram-title">From fragmented knowledge to useful context</strong>
-    <span id="diagram-desc">A generalized view of the retrieval experiment. It does not reproduce internal systems or data.</span>
+    <span class="meta">Hack Week / June 2026</span>
+    <strong id="diagram-title">Knowledge retrieval workflow</strong>
+    <span id="diagram-desc">Structured entries are retrieved as context for an assistant response.</span>
   </figcaption>
   <div class="diagram-flow">
     <div class="source-stack" aria-label="Fragmented sources">
@@ -15,7 +15,6 @@
     <span class="connector" aria-hidden="true">→</span>
     <div class="diagram-node output"><span class="meta">03 / Assist</span><strong>Grounded<br />response</strong></div>
   </div>
-  <p class="meta limitation">Prototype boundary: the experiment tested retrieval. Governance, contribution review, and long-term maintenance remained open design questions.</p>
 </figure>
 
 <style>
@@ -34,7 +33,6 @@
   .blue-node .meta { color: white; }
   .output { border-width: 2px; }
   .connector { color: var(--blue); font-size: 1.5rem; }
-  .limitation { margin: 0; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); }
   @media (max-width: 760px) {
     figcaption { grid-template-columns: 1fr; gap: .75rem; }
     .diagram-flow { grid-template-columns: 1fr; padding-block: 2rem; }

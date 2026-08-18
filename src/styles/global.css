@@ -39,11 +39,6 @@ button { color: inherit; }
 .blue { color: var(--blue); }
 .surface { background: var(--paper-bright); }
 
-.media-placeholder { position: relative; display: grid; min-height: 18rem; place-items: center; overflow: hidden; border: 1px solid var(--rule); background: linear-gradient(135deg, rgba(23,70,224,.08), transparent 52%), var(--paper-bright); }
-.media-placeholder::before, .media-placeholder::after { position: absolute; content: ""; background: var(--rule); }
-.media-placeholder::before { width: 140%; height: 1px; transform: rotate(-28deg); }
-.media-placeholder::after { width: 1px; height: 140%; transform: rotate(61deg); }
-.media-placeholder span { z-index: 1; max-width: 16rem; padding: .7rem 1rem; color: var(--muted); background: var(--paper-bright); font-family: var(--mono); font-size: .72rem; text-align: center; letter-spacing: .06em; text-transform: uppercase; }
 
 .reveal { opacity: 1; transform: none; }
 .js .reveal { opacity: 0; transform: translateY(1.25rem); transition: opacity .6s var(--ease), transform .6s var(--ease); }
@@ -52,7 +47,6 @@ button { color: inherit; }
 @media (max-width: 720px) {
   :root { --page: min(100% - 1.5rem, 90rem); --section: 4.5rem; }
   .display { font-size: clamp(3rem, 16vw, 5rem); }
-  .media-placeholder { min-height: 14rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

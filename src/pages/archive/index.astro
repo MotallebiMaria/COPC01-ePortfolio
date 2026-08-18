@@ -3,14 +3,14 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArchiveRow from "@/components/ArchiveRow.astro";
 import { categories, portfolioItems } from "@/data/portfolio";
 ---
-<BaseLayout title="Archive — Maria Motallebi" description="Projects, professional experience, teaching, research, and recognition from Maria Motallebi's professional archive.">
+<BaseLayout title="Archive: Maria Motallebi" description="Projects, professional experience, teaching, research, and recognition from Maria Motallebi's professional archive.">
   <section class="archive-hero page-shell">
     <div>
       <p class="eyebrow">Professional archive</p>
       <h1 class="display">Index of work.</h1>
     </div>
     <div class="archive-intro">
-      <p class="lede">A structured record of engineering, teaching, research, leadership, and evidence—represented according to what each kind of work actually is.</p>
+      <p class="lede">Engineering, teaching, research, leadership, and recognition organized by type and date.</p>
       <p class="meta" aria-live="polite"><span id="visible-count">{portfolioItems.length}</span> / {portfolioItems.length} entries</p>
     </div>
   </section>

@@ -12,7 +12,7 @@ for (const viewport of viewports) {
   test(`homepage is responsive at ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto("./");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Work across systems");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Software, systems, teaching, and research");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     expect(overflow).toBe(false);
   });
@@ -43,11 +43,11 @@ test("mobile navigation exposes all primary destinations", async ({ page }) => {
   const menu = page.getByRole("button", { name: "Menu" });
   await menu.click();
   await expect(menu).toHaveAttribute("aria-expanded", "true");
-  await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link")).toHaveCount(4);
+  await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link")).toHaveCount(3);
 });
 
 test("core pages have no serious accessibility violations", async ({ page }) => {
-  for (const route of ["./", "./archive/", "./archive/knowledge-retrieval-prototype/", "./about/", "./resume/"]) {
+  for (const route of ["./", "./archive/", "./archive/knowledge-retrieval-prototype/", "./resume/"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
     expect(results.violations, `${route}: ${results.violations.map((issue) => issue.id).join(", ")}`).toEqual([]);
