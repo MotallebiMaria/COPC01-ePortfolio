@@ -13,6 +13,15 @@ export type DetailSection = {
   list?: string[];
 };
 
+export type PortfolioImage = {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  layout?: "landscape" | "portrait";
+};
+
 export type PortfolioItem = {
   id: string;
   slug: string;
@@ -27,6 +36,7 @@ export type PortfolioItem = {
   featured: boolean;
   summary: string;
   tags: string[];
+  image?: PortfolioImage;
   sections: DetailSection[];
   references?: ReferenceItem[];
   externalHref?: string;
@@ -104,6 +114,13 @@ export const portfolioItems: PortfolioItem[] = [
     featured: true,
     summary: "A full-stack competition platform designed to support recurring game-bot events, secure submissions, match execution, and live experiences.",
     tags: ["Django", "React", "PostgreSQL", "Docker", "C++"],
+    image: {
+      src: "images/codeclash-platform.webp",
+      alt: "CodeClash dashboard showing a live competition, standings, notifications, and bot submissions",
+      caption: "CodeClash platform interface",
+      width: 2730,
+      height: 1594
+    },
     sections: [
       { heading: "Overview", paragraphs: ["CodeClash is CREATE’s programming competition platform. Teams write bots for a game and submit them to compete in simulated matches. The project grew from event-specific functionality into a reusable platform intended to support different games and future competitions."] },
       { heading: "My contributions", paragraphs: ["As VP of Technology, I lead technical planning and contribute directly to backend and infrastructure work. I established development workflows, service boundaries, environment configuration, code-quality tooling, CI checks, deployment foundations, onboarding documentation, and health-check conventions while coordinating work across a small development team."], list: ["Django REST backend and PostgreSQL data model", "React and TypeScript frontend collaboration", "Docker-based multi-service development environment", "C++ runner direction for isolated bot execution", "GitHub Actions, staging deployment, and contributor documentation"] },
@@ -125,6 +142,13 @@ export const portfolioItems: PortfolioItem[] = [
     featured: true,
     summary: "Tutorials, labs, office hours, and assessment across discrete mathematics, data structures, and software tools and systems programming.",
     tags: ["C", "Unix", "Data structures", "Proofs", "Mentorship"],
+    image: {
+      src: "images/teaching-materials.webp",
+      alt: "Maria explaining a discrete mathematics proof on a classroom chalkboard",
+      caption: "Discrete mathematics tutorial at the University of Toronto Scarborough",
+      width: 2604,
+      height: 1498
+    },
     sections: [
       { heading: "Appointments", paragraphs: [], list: ["CSCB09, Software Tools and Systems Programming, January to August 2026", "CSCA48, Introduction to Computer Science II, January to August 2026", "CSCA67/MATA67, Discrete Mathematics, September to December 2025"] },
       { heading: "Role and approach", paragraphs: ["I lead tutorials or labs, support students during office hours, and assess programming work and exams. My approach is to make the hidden reasoning visible: trace a process on the board, name the decision being made, and then connect the concrete example back to the general idea."] },
@@ -145,6 +169,13 @@ export const portfolioItems: PortfolioItem[] = [
     featured: true,
     summary: "Collaborative literature mapping that categorized how oral examinations are designed, used, and evaluated in computer science education.",
     tags: ["Systematic mapping", "CS education", "Research synthesis", "Academic writing"],
+    image: {
+      src: "images/research-poster.webp",
+      alt: "Research poster titled Oral Examinations in CS: A Systematic Literature Map",
+      caption: "Poster presented at the 2025 UTSC CMS Undergraduate Research Symposium",
+      width: 1960,
+      height: 1470
+    },
     externalHref: "https://dblp.org/rec/conf/iticse/MotallebiAAACKO26",
     sections: [
       { heading: "Research context", paragraphs: ["The project examined published research on oral examinations in computer science education. Our team used a systematic mapping process to identify relevant studies and categorize their populations, interventions, evaluation methods, and reported outcomes."] },
@@ -169,6 +200,14 @@ export const portfolioItems: PortfolioItem[] = [
     featured: false,
     summary: "Embedded C development and validation of CAN bus communication between simulated CubeSat subsystems using STM32 development boards.",
     tags: ["Embedded C", "STM32", "CAN bus", "Hardware testing"],
+    image: {
+      src: "images/firmware-bench.webp",
+      alt: "STM32 development board connected to a laptop running flight software code and serial output",
+      caption: "STM32 firmware development and bench testing",
+      width: 930,
+      height: 1602,
+      layout: "portrait"
+    },
     sections: [
       { heading: "Context and role", paragraphs: ["I contributed to flight-software work for FINCH, a student CubeSat project. My focus was establishing and validating CAN bus communication between the onboard computer and payload interfaces using STM32 Nucleo development boards."] },
       { heading: "Process", paragraphs: ["The work combined firmware changes with physical testing. I configured messages, simulated subsystem interactions, inspected communication behaviour, and documented findings so that failures could be distinguished between software, configuration, and hardware setup."] },
@@ -189,6 +228,13 @@ export const portfolioItems: PortfolioItem[] = [
     featured: false,
     summary: "Co-founded a robotics club, developed introductory lessons, and mentored a six-student competition team.",
     tags: ["Robotics", "Curriculum", "LEGO Mindstorms", "Mentorship"],
+    image: {
+      src: "images/robotics-work.png",
+      alt: "LEGO Mindstorms competition robot beside the Best Engineering Design award",
+      caption: "Competition robot and Best Engineering Design award",
+      width: 462,
+      height: 330
+    },
     sections: [
       { heading: "Program", paragraphs: ["I co-founded the school’s first robotics club and developed lessons introducing programming, mechanical design, sensors, and iterative testing through LEGO Mindstorms EV3."] },
       { heading: "Outcome", paragraphs: ["I coordinated practice and competition logistics while mentoring a team of six students. The team received the Best Engineering Design Award at the Ontario Tech University Engineering Robotics Competition."] },

@@ -17,6 +17,16 @@ describe("portfolio archive", () => {
     }
   });
 
+  it("maps each available work image to its archive entry", () => {
+    expect(portfolioItems.filter((item) => item.image).map((item) => item.slug)).toEqual([
+      "codeclash-platform",
+      "teaching-university-of-toronto",
+      "oral-examinations-research",
+      "finch-flight-software",
+      "robotics-instruction"
+    ]);
+  });
+
   it("includes every assignment-critical component in the work-term entry", () => {
     const entry = portfolioItems.find((item) => item.slug === "knowledge-retrieval-prototype");
     expect(entry).toBeDefined();

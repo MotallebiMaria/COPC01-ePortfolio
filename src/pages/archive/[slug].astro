@@ -30,6 +30,11 @@ const base = import.meta.env.BASE_URL;
 
     {item.slug === "knowledge-retrieval-prototype" && <section class="case-media page-shell reveal"><KnowledgeDiagram /></section>}
 
+    {item.image && <figure class:list={["case-image page-shell reveal", { portrait: item.image.layout === "portrait" }] }>
+      <img src={`${base}${item.image.src}`} alt={item.image.alt} width={item.image.width} height={item.image.height} loading="eager" decoding="async" />
+      <figcaption><span class="meta">Archive / {item.id}</span><span>{item.image.caption}</span></figcaption>
+    </figure>}
+
     {item.organization === "Rocket Innovation Studio" && <aside class="disclosure page-shell" aria-label="Confidentiality note">
       <strong>Confidentiality</strong>
       <span>{item.slug === "knowledge-retrieval-prototype" ? "Internal source code, data, and presentation materials are not published." : "Descriptions exclude internal implementation details and confidential materials."}</span>
@@ -80,6 +85,12 @@ const base = import.meta.env.BASE_URL;
   .case-meta dt { margin-bottom: .25rem; color: var(--muted); font-family: var(--mono); font-size: .67rem; letter-spacing: .065em; text-transform: uppercase; }
   .case-meta dd { margin: 0; font-size: .9rem; }
   .case-media { padding-bottom: var(--section); }
+  .case-image { margin-block: 0 var(--section); }
+  .case-image img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: var(--paper-bright); }
+  .case-image figcaption { display: flex; justify-content: space-between; gap: 2rem; padding-top: .7rem; color: var(--muted); font-size: .82rem; }
+  .case-image.portrait { display: grid; grid-template-columns: minmax(0, .7fr) minmax(15rem, .3fr); align-items: end; gap: 1.5rem; }
+  .case-image.portrait img { max-width: 38rem; }
+  .case-image.portrait figcaption { display: grid; }
   .disclosure { position: static; display: flex; align-self: auto; gap: 1rem; margin-bottom: var(--section); padding-block: .8rem; border-block: 1px solid var(--rule); color: var(--muted); font-size: .82rem; }
   .disclosure strong { color: var(--ink); font-family: var(--mono); font-size: .7rem; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
   .case-body { display: grid; grid-template-columns: .45fr 1.55fr; gap: clamp(3rem, 8vw, 8rem); padding-bottom: var(--section); }
@@ -108,5 +119,6 @@ const base = import.meta.env.BASE_URL;
     .case-section { grid-template-columns: 2.5rem 1fr; }
     .case-next { grid-template-columns: 1fr; }
     .case-next a + a { border-top: 0; border-left: 1px solid var(--rule); }
+    .case-image.portrait { grid-template-columns: 1fr; }
   }
 </style>

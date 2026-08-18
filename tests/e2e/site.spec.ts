@@ -37,6 +37,15 @@ test("navigation and generated archive links resolve", async ({ page, request })
   }
 });
 
+test("portfolio images load from the GitHub Pages base path", async ({ page }) => {
+  for (const route of ["./", "./archive/codeclash-platform/", "./archive/teaching-university-of-toronto/", "./archive/oral-examinations-research/", "./archive/finch-flight-software/", "./archive/robotics-instruction/"]) {
+    await page.goto(route);
+    const image = page.locator("img").first();
+    await expect(image).toBeVisible();
+    expect(await image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0), route).toBe(true);
+  }
+});
+
 test("mobile navigation exposes all primary destinations", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto("./");
