@@ -1,0 +1,62 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArchiveRow from "@/components/ArchiveRow.astro";
+import { categories, portfolioItems } from "@/data/portfolio";
+---
+<BaseLayout title="Archive — Maria Motallebi" description="Projects, professional experience, teaching, research, and recognition from Maria Motallebi's professional archive.">
+  <section class="archive-hero page-shell">
+    <div>
+      <p class="eyebrow">Professional archive</p>
+      <h1 class="display">Index of work.</h1>
+    </div>
+    <div class="archive-intro">
+      <p class="lede">A structured record of engineering, teaching, research, leadership, and evidence—represented according to what each kind of work actually is.</p>
+      <p class="meta" aria-live="polite"><span id="visible-count">{portfolioItems.length}</span> / {portfolioItems.length} entries</p>
+    </div>
+  </section>
+
+  <section class="archive-body page-shell">
+    <div class="filters" aria-label="Filter archive">
+      <button class="filter-button active" type="button" data-filter="All" aria-pressed="true">All</button>
+      {categories.map((category) => <button class="filter-button" type="button" data-filter={category} aria-pressed="false">{category}</button>)}
+    </div>
+    <div id="archive-list">
+      {portfolioItems.map((item) => <ArchiveRow item={item} showSummary />)}
+    </div>
+    <p id="empty-state" hidden>No entries in this category.</p>
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>("[data-filter]")];
+  const rows = [...document.querySelectorAll<HTMLElement>("[data-archive-row]")];
+  const count = document.querySelector<HTMLElement>("#visible-count");
+  const empty = document.querySelector<HTMLElement>("#empty-state");
+  buttons.forEach((button) => button.addEventListener("click", () => {
+    const filter = button.dataset.filter;
+    buttons.forEach((candidate) => {
+      const active = candidate === button;
+      candidate.classList.toggle("active", active);
+      candidate.setAttribute("aria-pressed", String(active));
+    });
+    let visible = 0;
+    rows.forEach((row) => {
+      const show = filter === "All" || row.dataset.category === filter;
+      row.hidden = !show;
+      if (show) visible += 1;
+    });
+    if (count) count.textContent = String(visible);
+    if (empty) empty.hidden = visible !== 0;
+  }));
+</script>
+
+<style>
+  .archive-hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 4rem; align-items: end; padding-block: clamp(4rem, 9vw, 8rem); border-bottom: 1px solid var(--ink); }
+  .archive-intro .meta { margin-top: 2rem; color: var(--muted); }
+  .archive-body { padding-block: 2rem var(--section); }
+  .filters { display: flex; flex-wrap: wrap; gap: .65rem 1.5rem; margin-bottom: 4rem; }
+  .filter-button { padding: .4rem 0; border: 0; border-bottom: 1px solid transparent; background: transparent; cursor: pointer; }
+  .filter-button:hover, .filter-button.active { color: var(--blue); border-color: var(--blue); }
+  #empty-state { padding: 3rem 0; color: var(--muted); }
+  @media (max-width: 760px) { .archive-hero { grid-template-columns: 1fr; gap: 2rem; } }
+</style>

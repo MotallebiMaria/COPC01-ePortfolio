@@ -1,0 +1,122 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+const experience = [
+  { role: "Incoming Embedded Software Engineering Intern", org: "Kepler Communications Inc.", date: "Fall 2026", bullets: ["Four-month embedded software engineering work term focused on C and C++."] },
+  { role: "Software Developer Intern (Backend)", org: "Rocket Innovation Studio", date: "May–Aug 2026", bullets: ["Developed and maintained C# and ASP.NET backend services supporting mortgage-title workflows.", "Investigated unfamiliar services and data, wrote unit tests and test plans, reviewed code, and supported controlled delivery."] },
+  { role: "Vice President of Technology", org: "UofT CREATE Club", date: "Aug 2025–Present", bullets: ["Lead technical planning and mentor a small development team across club software projects.", "Lead backend and infrastructure development for CodeClash using Django, React, PostgreSQL, Docker, and C++."] },
+  { role: "Undergraduate Teaching Assistant", org: "University of Toronto Scarborough", date: "Sep 2025–Aug 2026", bullets: ["Led tutorials, labs, and office hours for systems programming, data structures, and discrete mathematics.", "Assessed programming work and exams with attention to correctness, design, and clear feedback."] },
+  { role: "Undergraduate Researcher", org: "University of Toronto", date: "May–Sep 2025", bullets: ["Reviewed and categorized literature on oral examinations in computer science education.", "Presented at the 2025 UTSC CMS Undergraduate Research Symposium; co-authored an ITiCSE 2026 paper."] },
+  { role: "Firmware Developer — Flight Software", org: "University of Toronto Aerospace Team", date: "May–Aug 2025", bullets: ["Developed embedded C firmware and tested CAN bus communication between simulated CubeSat subsystems using STM32 boards."] }
+];
+---
+<BaseLayout title="Résumé — Maria Motallebi" description="Résumé of Maria Motallebi, computer science student and software engineer working across backend, embedded systems, teaching, research, and technical leadership.">
+  <div class="resume-toolbar page-shell no-print">
+    <p class="meta">Résumé / Updated August 2026</p>
+    <div>
+      <button type="button" onclick="window.print()">Print / Save PDF</button>
+      <a href={`${base}maria-motallebi-resume.pdf`} download>Download PDF</a>
+    </div>
+  </div>
+  <article class="resume page-shell" id="resume-document">
+    <header>
+      <div>
+        <h1>Maria Motallebi</h1>
+        <p>Software engineering · Embedded systems · Teaching · Research</p>
+      </div>
+      <address>
+        Toronto, Ontario<br />
+        <a href="mailto:motallebimaria@gmail.com">motallebimaria@gmail.com</a><br />
+        <a href="https://github.com/MotallebiMaria">github.com/MotallebiMaria</a><br />
+        <a href="https://www.linkedin.com/in/maria-motallebi/">linkedin.com/in/maria-motallebi</a>
+      </address>
+    </header>
+
+    <section>
+      <h2>Education</h2>
+      <div class="resume-entry education">
+        <div><h3>University of Toronto Scarborough</h3><p>Honours BSc, Computer Science Specialist Co-op — Software Engineering Stream</p></div>
+        <p class="date">Sep 2024–Jun 2028 (expected)</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      {experience.map((entry) => (
+        <div class="resume-entry">
+          <div>
+            <h3>{entry.role}</h3>
+            <p class="organization">{entry.org}</p>
+            <ul>{entry.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+          </div>
+          <p class="date">{entry.date}</p>
+        </div>
+      ))}
+    </section>
+
+    <section>
+      <h2>Selected Projects & Leadership</h2>
+      <div class="resume-entry"><div><h3>CodeClash Platform</h3><p class="organization">Technical lead · Backend and infrastructure developer</p><ul><li>Developing a reusable game-bot competition platform with a Django API, React frontend, PostgreSQL, Docker-based services, CI/CD, and a C++ execution layer.</li></ul></div><p class="date">2025–Present</p></div>
+      <div class="resume-entry"><div><h3>Robotics Club Co-founder and Instructor</h3><p class="organization">As-Sadiq Islamic School</p><ul><li>Developed an introductory robotics curriculum and mentored a six-student team recognized with a Best Engineering Design Award.</li></ul></div><p class="date">2022–2024</p></div>
+    </section>
+
+    <section class="resume-columns">
+      <div>
+        <h2>Technical Skills</h2>
+        <p><strong>Languages:</strong> C, C++, C#, Python, Java, TypeScript, SQL, HTML, CSS</p>
+        <p><strong>Software:</strong> ASP.NET, Django, React, Vite, PostgreSQL, Docker, Git, Linux, REST APIs</p>
+        <p><strong>Systems:</strong> STM32, CAN bus, CI/CD, testing, data structures, object-oriented design</p>
+      </div>
+      <div>
+        <h2>Research & Recognition</h2>
+        <p><strong>Oral Examinations in CS — A Systematic Literature Map.</strong> Co-author, ITiCSE 2026.</p>
+        <p><strong>International Scholar Award.</strong> University of Toronto Scarborough, 2024.</p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .resume-toolbar { display: flex; justify-content: space-between; gap: 2rem; padding-block: 2rem; border-bottom: 1px solid var(--rule); }
+  .resume-toolbar > div { display: flex; gap: 1.5rem; }
+  .resume-toolbar button, .resume-toolbar a { padding: 0; color: var(--blue); border: 0; border-bottom: 1px solid currentColor; background: transparent; font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; text-decoration: none; text-transform: uppercase; cursor: pointer; }
+  .resume { max-width: 68rem; padding-block: clamp(3rem, 7vw, 6rem); }
+  .resume > header { display: flex; justify-content: space-between; gap: 2rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .resume h1 { margin: 0; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 500; line-height: 1; letter-spacing: -.055em; }
+  .resume header p { margin: .6rem 0 0; color: var(--muted); }
+  .resume address { flex: 0 0 auto; font-family: var(--mono); font-size: .72rem; font-style: normal; line-height: 1.65; text-align: right; }
+  .resume section { padding-block: 1.6rem; border-bottom: 1px solid var(--rule); }
+  .resume h2 { margin: 0 0 1.1rem; color: var(--blue); font-family: var(--mono); font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+  .resume-entry { display: grid; grid-template-columns: 1fr auto; gap: 1rem 2rem; margin-bottom: 1.3rem; }
+  .resume-entry:last-child { margin-bottom: 0; }
+  .resume h3 { margin: 0; font-size: 1rem; font-weight: 600; }
+  .organization, .education p { margin: .1rem 0 .35rem; color: var(--muted); }
+  .resume ul { margin: .25rem 0 0; padding-left: 1rem; }
+  .resume li { margin-bottom: .2rem; font-size: .88rem; }
+  .date { margin: 0; font-family: var(--mono); font-size: .68rem; white-space: nowrap; }
+  .resume-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; border-bottom: 0 !important; }
+  .resume-columns p { margin: .5rem 0; font-size: .84rem; }
+  @media (max-width: 680px) {
+    .resume-toolbar, .resume > header { flex-direction: column; }
+    .resume address { text-align: left; }
+    .resume-entry, .resume-columns { grid-template-columns: 1fr; }
+    .date { grid-row: 1; }
+  }
+  @media print {
+    @page { size: letter; margin: .3in .45in; }
+    body { font-size: 8pt; }
+    .resume { width: 100%; max-width: none; padding: 0; }
+    .resume > header { padding-bottom: 7pt; }
+    .resume h1 { font-size: 25pt; }
+    .resume address { font-size: 6.4pt; line-height: 1.45; }
+    .resume section { padding-block: 4.5pt; break-inside: avoid; }
+    .resume h2 { margin-bottom: 4pt; font-size: 6.5pt; }
+    .resume-entry { gap: 4pt 14pt; margin-bottom: 2.5pt; break-inside: avoid; }
+    .resume ul { margin-top: 1pt; }
+    .resume li, .resume-columns p { margin-bottom: 0; font-size: 6.8pt; line-height: 1.22; }
+    .resume h3 { font-size: 7.5pt; }
+    .resume header p, .organization, .education p { margin-block: 1pt; font-size: 6.8pt; }
+    .date { font-size: 6.2pt; }
+    .resume-columns { gap: 14pt; }
+  }
+</style>

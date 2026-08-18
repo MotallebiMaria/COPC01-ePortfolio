@@ -1,0 +1,116 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import KnowledgeDiagram from "@/components/KnowledgeDiagram.astro";
+import { portfolioItems, type PortfolioItem } from "@/data/portfolio";
+
+export function getStaticPaths() {
+  return portfolioItems.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+
+interface Props { item: PortfolioItem; }
+const { item } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title={`${item.title} — Maria Motallebi`} description={item.summary}>
+  <article>
+    <header class="case-header page-shell">
+      <div class="archive-id">Archive / {item.id}</div>
+      <div>
+        <p class="eyebrow">{item.category}</p>
+        <h1 class="display">{item.title}</h1>
+        <p class="lede">{item.subtitle}</p>
+      </div>
+      <dl class="case-meta">
+        <div><dt>Organization</dt><dd>{item.organization}</dd></div>
+        <div><dt>Role</dt><dd>{item.role}</dd></div>
+        <div><dt>Date</dt><dd>{item.date}</dd></div>
+        <div><dt>Status</dt><dd>{item.status}</dd></div>
+      </dl>
+    </header>
+
+    <section class="case-media page-shell reveal">
+      {item.slug === "knowledge-retrieval-prototype" ? <KnowledgeDiagram /> : <div class="media-placeholder" role="img" aria-label={item.mediaLabel}><span>{item.mediaLabel}</span></div>}
+    </section>
+
+    <div class="case-body page-shell">
+      <aside>
+        <p class="meta">Contents</p>
+        <ol>
+          {item.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{String(index + 1).padStart(2, "0")} / {section.heading}</a></li>)}
+          <li><a href="#evidence">{String(item.sections.length + 1).padStart(2, "0")} / Evidence</a></li>
+        </ol>
+      </aside>
+      <div class="case-sections">
+        {item.sections.map((section, index) => (
+          <section id={`section-${index + 1}`} class="case-section reveal">
+            <p class="meta">{String(index + 1).padStart(2, "0")}</p>
+            <h2>{section.heading}</h2>
+            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            {section.list && <ul>{section.list.map((entry) => <li>{entry}</li>)}</ul>}
+          </section>
+        ))}
+        <section id="evidence" class="case-section evidence reveal">
+          <p class="meta">{String(item.sections.length + 1).padStart(2, "0")}</p>
+          <h2>Selected evidence</h2>
+          <div class="evidence-list">
+            {item.evidence.map((evidence) => (
+              <article>
+                <div class="evidence-top"><span class="meta">{evidence.type}</span><span class:list={["access", `access-${evidence.access.toLowerCase().replaceAll(" ", "-")}`]}>{evidence.access}</span></div>
+                <h3>{evidence.title}</h3>
+                <p>{evidence.description}</p>
+                {evidence.href && <a href={evidence.href}>Open public record ↗</a>}
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+    <nav class="case-next page-shell" aria-label="Archive navigation">
+      <a href={`${base}archive/`}><span class="meta">Return to</span>Full archive</a>
+      {item.externalHref && <a href={item.externalHref}><span class="meta">External record</span>View source ↗</a>}
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-header { display: grid; grid-template-columns: .3fr 1.4fr .7fr; gap: 3rem; padding-block: clamp(4rem, 8vw, 7rem); }
+  .case-header .display { max-width: 11ch; margin-block: 1rem 2rem; font-size: clamp(3rem, 7vw, 7rem); }
+  .case-header .lede { max-width: 34rem; }
+  .case-meta { margin: 0; border-top: 1px solid var(--ink); }
+  .case-meta div { padding: .8rem 0; border-bottom: 1px solid var(--rule); }
+  .case-meta dt { margin-bottom: .25rem; color: var(--muted); font-family: var(--mono); font-size: .67rem; letter-spacing: .065em; text-transform: uppercase; }
+  .case-meta dd { margin: 0; font-size: .9rem; }
+  .case-media { padding-bottom: var(--section); }
+  .case-media .media-placeholder { min-height: min(58vw, 44rem); }
+  .case-body { display: grid; grid-template-columns: .45fr 1.55fr; gap: clamp(3rem, 8vw, 8rem); padding-bottom: var(--section); }
+  aside { align-self: start; position: sticky; top: 2rem; }
+  aside ol { margin: 1rem 0 0; padding: 0; list-style: none; }
+  aside li { border-top: 1px solid var(--rule); }
+  aside li:last-child { border-bottom: 1px solid var(--rule); }
+  aside a { display: block; padding: .65rem 0; font-size: .8rem; text-decoration: none; }
+  .case-section { display: grid; grid-template-columns: 3rem minmax(0, 1fr); padding: 0 0 clamp(4rem, 8vw, 7rem); scroll-margin-top: 2rem; }
+  .case-section > *:not(.meta) { grid-column: 2; }
+  .case-section h2 { max-width: 18ch; margin: 0 0 2rem; font-size: clamp(2rem, 4vw, 4rem); font-weight: 500; line-height: 1; letter-spacing: -.045em; }
+  .case-section > p:not(.meta), .case-section > ul { max-width: 48rem; font-size: clamp(1.05rem, 1.5vw, 1.2rem); }
+  .case-section ul { margin: 1rem 0 0; padding-left: 1.2rem; }
+  .case-section li { padding: .35rem 0; }
+  .evidence-list { display: grid; gap: 1rem; }
+  .evidence-list article { padding: 1.25rem; border: 1px solid var(--rule); background: var(--paper-bright); }
+  .evidence-top { display: flex; justify-content: space-between; gap: 1rem; }
+  .evidence-list h3 { margin: 2.5rem 0 .5rem; font-size: 1.25rem; }
+  .evidence-list p { max-width: 40rem; margin-bottom: .5rem; color: var(--muted); font-size: .9rem; }
+  .evidence-list a { font-family: var(--mono); font-size: .75rem; text-transform: uppercase; }
+  .access { padding: .2rem .45rem; border: 1px solid currentColor; color: var(--muted); font-family: var(--mono); font-size: .62rem; letter-spacing: .05em; }
+  .access-public { color: var(--blue); }
+  .case-next { display: grid; grid-template-columns: 1fr 1fr; padding-bottom: var(--section); }
+  .case-next a { display: flex; min-height: 9rem; flex-direction: column; justify-content: space-between; padding: 1rem; border: 1px solid var(--rule); font-size: clamp(1.5rem, 3vw, 2.5rem); text-decoration: none; }
+  .case-next a + a { border-left: 0; }
+  @media (max-width: 800px) {
+    .case-header, .case-body { grid-template-columns: 1fr; }
+    .case-header { gap: 2rem; }
+    aside { display: none; }
+    .case-section { grid-template-columns: 2.5rem 1fr; }
+    .case-next { grid-template-columns: 1fr; }
+    .case-next a + a { border-top: 0; border-left: 1px solid var(--rule); }
+  }
+</style>

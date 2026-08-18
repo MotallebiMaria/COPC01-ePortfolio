@@ -1,0 +1,125 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArchiveRow from "@/components/ArchiveRow.astro";
+import { featuredItems, portfolioItems } from "@/data/portfolio";
+import { timeline } from "@/data/timeline";
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="Maria Motallebi — Software, Systems, Teaching & Research" description="The professional ePortfolio of Maria Motallebi, a University of Toronto computer science student working across software engineering, systems, teaching, research, and technical leadership.">
+  <section class="hero page-shell">
+    <div class="hero-index meta">Professional archive<br />Toronto · 2026</div>
+    <div>
+      <p class="eyebrow">Maria Motallebi</p>
+      <h1 class="display">Work across systems.</h1>
+    </div>
+    <div class="hero-bottom">
+      <p class="lede">Computer science student working across software engineering, embedded systems, teaching, research, and technical leadership.</p>
+      <a class="button-link blue" href="#selected">Explore archive <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <section id="selected" class="selected page-shell reveal">
+    <div class="section-heading">
+      <p class="eyebrow">Selected work</p>
+      <h2 class="section-title">A practice built across disciplines.</h2>
+      <p>Selected entries show the breadth of the archive without flattening teaching, research, employment, and technical projects into the same kind of work.</p>
+    </div>
+    <div class="selected-list">
+      {featuredItems.map((item) => <ArchiveRow item={item} showSummary />)}
+    </div>
+  </section>
+
+  <section class="practice surface reveal">
+    <div class="page-shell practice-grid">
+      <div>
+        <p class="eyebrow">Areas of practice</p>
+        <h2 class="section-title">Breadth, with technical depth.</h2>
+      </div>
+      <ol>
+        <li><span>01</span> Software engineering</li>
+        <li><span>02</span> Systems and firmware</li>
+        <li><span>03</span> Teaching and mentorship</li>
+        <li><span>04</span> Research</li>
+        <li><span>05</span> Technical leadership</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="timeline-section page-shell reveal">
+    <div class="timeline-heading">
+      <div>
+        <p class="eyebrow">Experience timeline</p>
+        <h2 class="section-title">2024—2026</h2>
+      </div>
+      <p>Overlapping roles are part of the story: engineering informs teaching, research sharpens evidence, and leadership turns decisions into shared systems.</p>
+    </div>
+    <div class="timeline" aria-label="Experience timeline">
+      {timeline.map((entry) => (
+        <article>
+          <p class="meta">{entry.period}</p>
+          <h3>{entry.title}</h3>
+          <p>{entry.area}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="recognition page-shell reveal">
+    <p class="eyebrow">Recognition</p>
+    <div class="recognition-grid">
+      <div class="recognition-number">2024</div>
+      <div>
+        <p class="meta">University of Toronto Scarborough</p>
+        <h2>International Scholar Award</h2>
+        <p>Undergraduate entrance scholarship recognizing academic excellence as an international student.</p>
+        <a class="button-link" href={`${base}archive/international-scholar-award/`}>View record <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="archive-cta">
+    <div class="page-shell">
+      <p class="meta">{portfolioItems.length.toString().padStart(2, "0")} entries in the archive</p>
+      <h2>Projects / Experience / Teaching / Research / Recognition</h2>
+      <a href={`${base}archive/`}>View full archive <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { display: grid; min-height: calc(100svh - 5.5rem); grid-template-columns: minmax(9rem, .25fr) 1fr; grid-template-rows: 1fr auto; gap: 3rem; padding-block: clamp(3rem, 8vw, 7rem); }
+  .hero-index { color: var(--muted); }
+  .hero-bottom { grid-column: 2; display: flex; align-items: end; justify-content: space-between; gap: 3rem; }
+  .selected, .timeline-section, .recognition { padding-block: var(--section); }
+  .section-heading { display: grid; grid-template-columns: .6fr 1.2fr 1fr; gap: 2rem; align-items: start; margin-bottom: 5rem; }
+  .section-heading > p:last-child { max-width: 30rem; margin: 0; color: var(--muted); }
+  .practice { padding-block: var(--section); border-block: 1px solid var(--rule); }
+  .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .practice ol { margin: 0; padding: 0; border-top: 1px solid var(--rule); list-style: none; }
+  .practice li { display: grid; grid-template-columns: 3rem 1fr; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); font-size: clamp(1.2rem, 2.4vw, 2rem); letter-spacing: -.035em; }
+  .practice li span { color: var(--blue); font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; }
+  .timeline-heading { display: grid; grid-template-columns: 1.3fr .7fr; gap: 3rem; align-items: end; margin-bottom: 4rem; }
+  .timeline-heading > p { max-width: 30rem; margin: 0; color: var(--muted); }
+  .timeline { display: grid; grid-template-columns: repeat(7, minmax(10rem, 1fr)); overflow-x: auto; border-top: 1px solid var(--ink); }
+  .timeline article { min-height: 15rem; padding: 1rem; border-right: 1px solid var(--rule); }
+  .timeline article::before { display: block; width: .6rem; height: .6rem; margin: -.34rem 0 4rem; content: ""; border-radius: 50%; background: var(--blue); }
+  .timeline h3 { margin: 0 0 .35rem; font-size: 1.05rem; line-height: 1.25; }
+  .timeline article > p:last-child { margin: 0; color: var(--muted); font-size: .85rem; }
+  .recognition-grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: 2rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--ink); }
+  .recognition-number { color: var(--blue); font-size: clamp(4rem, 10vw, 10rem); line-height: .9; letter-spacing: -.07em; }
+  .recognition h2 { max-width: 16ch; margin: 0; font-size: clamp(2rem, 4vw, 4rem); font-weight: 500; line-height: 1; letter-spacing: -.05em; }
+  .recognition-grid > div:last-child > p:not(.meta) { max-width: 36rem; color: var(--muted); }
+  .archive-cta { padding-block: var(--section); color: white; background: var(--blue); }
+  .archive-cta .meta { color: white; }
+  .archive-cta h2 { max-width: 18ch; margin: 2rem 0 3rem; font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 500; line-height: .95; letter-spacing: -.055em; }
+  .archive-cta a { display: flex; justify-content: space-between; padding-block: 1rem; border-top: 1px solid rgba(255,255,255,.45); color: white; font-family: var(--mono); font-size: .8rem; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; min-height: calc(100svh - 4.5rem); gap: 2rem; }
+    .hero-bottom { grid-column: 1; flex-direction: column; align-items: start; }
+    .section-heading, .practice-grid, .timeline-heading, .recognition-grid { grid-template-columns: 1fr; }
+    .section-heading { margin-bottom: 3rem; }
+    .timeline { grid-template-columns: 1fr; overflow: visible; border-left: 1px solid var(--ink); border-top: 0; }
+    .timeline article { min-height: auto; padding: 0 0 2.5rem 1.5rem; border: 0; }
+    .timeline article::before { display: inline-block; margin: 0 1rem .1rem -1.83rem; }
+  }
+</style>

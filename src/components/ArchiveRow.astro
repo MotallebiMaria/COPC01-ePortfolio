@@ -1,0 +1,35 @@
+---
+import type { PortfolioItem } from "@/data/portfolio";
+interface Props { item: PortfolioItem; showSummary?: boolean; }
+const { item, showSummary = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<article class="archive-row" data-category={item.category} data-archive-row>
+  <a href={`${base}archive/${item.slug}/`}>
+    <span class="archive-id">{item.id}</span>
+    <span class="row-main">
+      <span class="row-title">{item.title}</span>
+      {showSummary && <span class="row-summary">{item.summary}</span>}
+    </span>
+    <span class="meta row-date">{item.date}</span>
+    <span class="meta row-category">{item.category}</span>
+    <span class="row-arrow" aria-hidden="true">↗</span>
+  </a>
+</article>
+
+<style>
+  .archive-row { border-top: 1px solid var(--rule); }
+  .archive-row:last-child { border-bottom: 1px solid var(--rule); }
+  .archive-row > a { display: grid; grid-template-columns: 4rem minmax(0, 2fr) minmax(8rem, .8fr) minmax(7rem, .5fr) 1.5rem; gap: 1rem; align-items: start; padding: 1.45rem 0; text-decoration: none; transition: padding .25s var(--ease), color .2s; }
+  .archive-row > a:hover, .archive-row > a:focus-visible { padding-inline: .75rem; color: var(--blue); }
+  .row-main { display: flex; flex-direction: column; gap: .3rem; }
+  .row-title { font-size: clamp(1.2rem, 2vw, 1.65rem); font-weight: 500; line-height: 1.2; letter-spacing: -.025em; }
+  .row-summary { max-width: 44rem; color: var(--muted); font-size: .9rem; }
+  .row-arrow { justify-self: end; font-size: 1.25rem; }
+  @media (max-width: 800px) {
+    .archive-row > a { grid-template-columns: 2.5rem 1fr auto; }
+    .row-date { display: none; }
+    .row-category { grid-column: 2; }
+    .row-arrow { grid-column: 3; grid-row: 1; }
+  }
+</style>
