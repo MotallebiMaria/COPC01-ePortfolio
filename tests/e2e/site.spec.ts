@@ -62,9 +62,3 @@ test("core pages have no serious accessibility violations", async ({ page }) => 
     expect(results.violations, `${route}: ${results.violations.map((issue) => issue.id).join(", ")}`).toEqual([]);
   }
 });
-
-test("reduced motion leaves content visible", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("./");
-  await expect(page.locator(".reveal").first()).toHaveCSS("opacity", "1");
-});

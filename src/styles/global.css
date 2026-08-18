@@ -15,7 +15,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--paper); }
-body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); font-size: 1rem; line-height: 1.65; text-rendering: optimizeLegibility; }
+body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); font-size: 1rem; line-height: 1.65; }
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration-thickness: .08em; text-underline-offset: .18em; }
 a:hover { color: var(--blue); }
@@ -41,8 +41,6 @@ button { color: inherit; }
 
 
 .reveal { opacity: 1; transform: none; }
-.js .reveal { opacity: 0; transform: translateY(1.25rem); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-.reveal.is-visible { opacity: 1; transform: none; }
 
 @media (max-width: 720px) {
   :root { --page: min(100% - 1.5rem, 90rem); --section: 4.5rem; }
@@ -51,7 +49,6 @@ button { color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .reveal { opacity: 1; transform: none; }
 }
 
 @media print {

@@ -229,7 +229,7 @@ export const portfolioItems: PortfolioItem[] = [
     summary: "Co-founded a robotics club, developed introductory lessons, and mentored a six-student competition team.",
     tags: ["Robotics", "Curriculum", "LEGO Mindstorms", "Mentorship"],
     image: {
-      src: "images/robotics-work.png",
+      src: "images/robotics-work.webp",
       alt: "LEGO Mindstorms competition robot beside the Best Engineering Design award",
       caption: "Competition robot and Best Engineering Design award",
       width: 462,
